@@ -1,0 +1,53 @@
+#Problem statement
+=========================
+You are given an array of n pairs pairs where pairs[i] = [lefti, righti] and lefti < righti.
+
+A pair p2 = [c, d] follows a pair p1 = [a, b] if b < c. A chain of pairs can be formed in this fashion.
+
+Return the length longest chain which can be formed.
+
+You do not need to use up all the given intervals. You can select pairs in any order.
+
+ 
+
+Example 1:
+
+Input: pairs = [[1,2],[2,3],[3,4]]
+Output: 2
+Explanation: The longest chain is [1,2] -> [3,4].
+
+//code
+class Solution {
+public:
+    int n;
+    int dp[1001][1001]; //for memoization
+    int solve(vector<vector<int>> &pairs, int curr_indx, int prev_indx){
+
+        if(curr_indx >= n){
+            return 0;
+        }
+
+        if(prev_indx != -1 && dp[curr_indx][prev_indx] != -1){ // already we store in array
+            return dp[curr_indx][prev_indx];
+        }
+
+        int take = 0;
+        if(prev_indx == -1 || pairs[curr_indx][0] > pairs[prev_indx][1]){
+            take = 1 + solve(pairs, curr_indx+1, curr_indx);
+        }
+
+        int skip = solve(pairs, curr_indx+1, prev_indx);
+
+        if(prev_indx != -1)
+            dp[curr_indx][prev_indx] = max(take, skip);
+    
+        return max(take, skip);
+    }
+    int findLongestChain(vector<vector<int>>& pairs) {
+        n = pairs.size();
+        sort(begin(pairs), end(pairs)); //you can select pairs in any order
+        
+        memset(dp, -1, sizeof(dp));
+        return solve(pairs, 0, -1);
+    }
+};
