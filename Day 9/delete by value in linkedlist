@@ -1,0 +1,31 @@
+Node* deleteval(Node* head, int val){
+    if(head == NULL)
+    return head;
+
+    Node* temp = head;
+    Node* prev=NULL;
+
+    while(temp!=NULL){
+        if(temp->data == val){
+            prev->next  = temp->next;
+            free(temp);
+            break;            
+        }
+
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+int main()
+{
+    vector<int> arr={1,2,3,4};
+    Node *head = convertArr2LL(arr);
+    cout<<"Original List"<<endl;  
+    printList(head);
+
+    int val;
+    cout<<"Enter any value to delete : ";cin>>val;    
+    head = deleteval(head, val);
+    printList(head);
+}
