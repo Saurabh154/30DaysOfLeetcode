@@ -1,0 +1,38 @@
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+
+//code : This code show runtime error in leetcode
+
+
+Node* removeNthFromEnd(Node* head, int n) {        
+        Node* temp = head;
+        Node* prev = NULL;
+        int len=0;
+        while(temp!=NULL){
+            len++;
+            temp=temp->next;
+        }
+        temp=head;
+        int cnt=0;
+
+        if(head==NULL) return head;
+        
+        if(n==len){
+            head = head->next;
+            free(temp);
+            return head;
+        }
+        
+        while(temp!=NULL){
+            cnt++;
+            if(cnt == len-n+1){
+                prev->next = prev->next->next;
+                free(temp);
+                break;
+            }
+            prev = temp;
+            temp=temp->next;
+        }
+        return head;
+    }
+
