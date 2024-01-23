@@ -1,0 +1,44 @@
+Node* findIntersection(Node *firstHead, Node *secondHead)
+{
+    int len1=0,len2=0;
+
+	Node* temp1 = firstHead;
+	Node* temp2 = secondHead;
+
+	while(temp1!=NULL){
+		len1++;
+		temp1=temp1->next;
+	}
+	while(temp2!=NULL){
+		len2++;
+		temp2=temp2->next;
+	}
+
+	int len = abs(len1-len2);
+
+	while(len1<len2){
+		secondHead=secondHead->next;
+		len2--;
+	}
+	while(len1>len2){
+		firstHead=firstHead->next;
+		len1--;
+	}
+
+	while(firstHead!=NULL && secondHead!=NULL){
+
+            if(firstHead == secondHead){
+
+                return firstHead;
+
+            }
+
+            firstHead=firstHead->next;
+
+            secondHead=secondHead->next;
+
+        }
+
+        return NULL;
+	
+}
