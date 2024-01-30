@@ -1,0 +1,23 @@
+class Solution{
+public:
+    ListNode *moveToFront(ListNode *head){
+        
+        if(head->next==NULL) return head;
+        
+        //Initializing two pointers, tmp1 and tmp2.
+        ListNode *tmp1=head,*tmp2=head->next;
+        
+        //iterating until tmp2 reaches the last node.
+        while(tmp2->next!=NULL){
+            tmp1=tmp1->next;
+            tmp2=tmp2->next;
+        }
+        
+        //Making the last node as the new head node.
+        tmp2->next=head;
+        tmp1->next=NULL;
+        
+        //returning the updated head.
+        return tmp2;
+    }
+};
