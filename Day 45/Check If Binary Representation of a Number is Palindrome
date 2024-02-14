@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+bool checkPalindrome(long long N)
+{
+	vector<long long> rem;
+	while(N>0){
+		long long remainder = N%2;
+		rem.push_back(remainder);
+		N=N/2;
+	}
+	
+	long long n = rem.size();
+	int i=0;
+
+	while(i<=n-i-1){
+		if(rem[i]!=rem[n-i-1])
+			return false;
+
+        else {
+			i++;
+		}            
+
+    }
+
+    return true;
+}
