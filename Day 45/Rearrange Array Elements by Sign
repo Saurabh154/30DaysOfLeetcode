@@ -1,0 +1,48 @@
+Approach I
+
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> result(nums.size());
+
+        int Pi=0, Ni=1;
+
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] > 0){
+                result[Pi] = nums[i];
+                Pi += 2;
+            }
+            else{
+                result[Ni] = nums[i];
+                Ni +=2;
+            }
+        }
+
+        return result;
+    }
+};
+
+Approach II
+vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> ans, positive, negative;
+        int n = nums.size();
+
+        for(int i=0; i<n; i++){
+            if(nums[i] > 0){
+                positive.push_back(nums[i]);
+            }else{
+                negative.push_back(nums[i]);
+            }
+        }
+
+        int i=0, j=0;
+
+        while(j < nums.size() / 2){
+            ans.push_back(positive[i]);
+            i++;
+            ans.push_back(negative[j]);
+            j++;
+        }
+
+        return ans;
+    }
