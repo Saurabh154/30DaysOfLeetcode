@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+void Subsequences(string s, vector<string> &ans, string output, int index) {
+
+    if(index >= s.length()){
+        ans.push_back(output);
+        return;
+    }
+
+    output.push_back(s[index]);
+    Subsequences(s, ans, output, index+1);
+    output.pop_back();
+    Subsequences(s, ans, output, index+1);
+
+}
+vector<string> generateSubsequences(string s)
+{
+    vector<string> ans;
+    int index = 0;
+    string output;
+    Subsequences(s, ans, output, index);
+    return ans;
+}
