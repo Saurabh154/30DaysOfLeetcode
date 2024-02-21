@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void combination_sum(int index, int target, vector<int> &nums,vector<vector<int>> &ans, vector<int>& output) {
+        //base case
+        if(index == nums.size()){
+            if(target == 0){
+                ans.push_back(output);
+            }
+            return;            
+        }
+        // pick up the element
+        if(nums[index] <= target){
+            output.push_back(nums[index]);
+            combination_sum(index, target - nums[index], nums, ans, output);
+            output.pop_back();
+        }
+        // Not picked
+        combination_sum(index+1, target, nums, ans, output);
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> output;
+        int index = 0;
+        combination_sum(index, target, candidates, ans, output);
+        return ans;
+    }
+};
