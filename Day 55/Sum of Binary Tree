@@ -1,0 +1,17 @@
+void SumBT(Node* node, long int &sum){
+    
+    if(node == NULL){
+        return;
+    }
+    
+    sum += node->key;
+    SumBT(node->left, sum);
+    SumBT(node->right, sum);
+    
+}
+long int sumBT(Node* root)
+{
+    long int sum = 0;
+    SumBT(root, sum);
+    return sum;
+}
